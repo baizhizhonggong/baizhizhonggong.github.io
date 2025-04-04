@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>白衹重工｜专业绳匠服务平台</title>
+    <style>
+        :root {
+            --google-blue: #4285f4;
+            --google-red: #ea4335;
+            --hover-blue: #357abd;
+            --text-primary: #202124;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        /* 增强头部样式 */
+        .header {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            background: white;
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            margin-right: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(15deg);
+        }
+
+        /* 主内容区优化 */
+        .hero {
+            padding: 120px 2rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        /* 动态按钮设计 */
+        .cta-button {
+            background: var(--google-blue);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(66,133,244,0.1);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(66,133,244,0.2);
+            background: var(--hover-blue);
+        }
+
+        .cta-button:active::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+
+        /* 服务卡片动效 */
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: cardAppear 0.6s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .service-card {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .cta-button {
+                padding: 14px 32px;
+                font-size: 1rem;
+            }
+        }
+
+        /* 动画定义 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img src="logo.png" alt="白衹重工" class="logo">
+        <h2>白衹重工</h2>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1>专业绳匠服务平台<br>连接您的数字未来</h1>
+            <p class="subtitle">安全可靠的技术服务解决方案</p>
+
+            <button class="cta-button" id="contactButton">立即咨询</button>
+            
+            <div class="service-card">
+                <h3>我们的服务</h3>
+                <ul style="text-align: left; margin: 1rem 0;">
+                    <li>定制化技术服务</li>
+                    <li>安全加密通信方案</li>
+                    <li>7×24小时技术支持</li>
+                    <li>行业合规解决方案</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 邮件功能增强
+        const contactButton = document.getElementById('contactButton');
+        
+        const sendEmail = () => {
+            const email = 'zzzbaizhizhonggong@outlook.com';
+            const subject = encodeURIComponent('服务咨询 - 来自白衹重工官网');
+            const body = encodeURIComponent('尊敬的客服人员：\n\n您好！我想咨询以下服务：\n\n1. \n2. \n3. \n\n请尽快与我联系。\n\n此致\n敬礼');
+            
+            // 添加点击动画
+            contactButton.classList.add('clicked');
+            setTimeout(() => {
+                contactButton.classList.remove('clicked');
+            }, 300);
+
+            // 打开邮件客户端
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        };
+
+        // 事件监听
+        contactButton.addEventListener('click', sendEmail);
+        contactButton.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendEmail();
+        });
+
+        // 头部滚动交互
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            header.style.boxShadow = scrollY > 50 
+                ? '0 4px 12px rgba(0,0,0,0.15)'
+                : '0 2px 6px rgba(0,0,0,0.1)';
+            header.style.background = scrollY > 100 
+                ? 'rgba(255,255,255,0.98)'
+                : 'white';
+        });
+
+        // 服务卡片交互动画
+        const serviceCard = document.querySelector('.service-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(serviceCard);
+    </script>
+</body>
+</html>
